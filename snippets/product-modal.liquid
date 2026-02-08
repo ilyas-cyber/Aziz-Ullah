@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    box-sizing: border-box;
   }
 
   .modal-content {
@@ -24,6 +25,12 @@
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+  }
+
+  /* Ensure all internal elements use border-box */
+  .product-modal *, .product-modal *::before, .product-modal *::after {
+    box-sizing: border-box;
   }
 
   .modal-close {
@@ -35,6 +42,7 @@
     border: none;
     background: none;
     color: #000;
+    z-index: 10;
   }
 
   .modal-header-info {

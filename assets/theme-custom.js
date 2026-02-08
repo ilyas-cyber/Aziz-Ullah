@@ -196,20 +196,36 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   function addToCart(items) {
+    const atcBtnSpan = atcBtn.querySelector('span');
+    const originalText = atcBtnSpan.textContent;
+    atcBtn.disabled = true;
+    atcBtnSpan.textContent = 'ADDING...';
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: items })
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to add to cart');
+        return response.json();
+      })
       .then(data => {
-        console.log('Success:', data);
-        modal.style.display = 'none';
-        // Optionally redirect to cart or show success message
-        window.location.href = '/cart';
+        atcBtnSpan.textContent = 'ADDED!';
+        setTimeout(() => {
+          modal.style.display = 'none';
+          atcBtnSpan.textContent = originalText;
+          atcBtn.disabled = false;
+          window.location.href = '/cart';
+        }, 1000);
       })
       .catch((error) => {
         console.error('Error:', error);
+        atcBtnSpan.textContent = 'ERROR';
+        setTimeout(() => {
+          atcBtnSpan.textContent = originalText;
+          atcBtn.disabled = false;
+        }, 2000);
       });
   }
 });
