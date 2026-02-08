@@ -1,0 +1,300 @@
+{%- style -%}
+  .banner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f8f8f8;
+  }
+
+  .banner-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+  }
+
+  .banner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .banner-logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+  }
+
+  .banner-subtitle {
+     font-family: 'Inter', sans-serif;
+     font-size: 14px;
+     color: #333;
+     font-style: italic;
+  }
+
+  .banner-btn-choose {
+    background-color: #fff94a;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .banner-btn-choose::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  .banner-btn-choose:hover {
+    color: #fff;
+  }
+
+  .banner-btn-choose:hover::before {
+    left: 0;
+  }
+
+  .banner-content-wrapper {
+    position: relative;
+    height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .banner-background-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+  }
+
+  .banner-text-box {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    background: transparent;
+  }
+
+  .banner-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+  }
+
+  .banner-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .banner-btn-shop {
+    display: inline-flex;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 15px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .banner-btn-shop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #fff94a;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  .banner-btn-shop:hover {
+    color: #000;
+  }
+
+  .banner-btn-shop:hover::before {
+    left: 0;
+  }
+
+  .banner-btn-shop span, .banner-btn-choose span {
+    transition: transform 0.3s ease;
+  }
+
+  .banner-btn-shop:hover span, .banner-btn-choose:hover span {
+    transform: translateX(5px);
+  }
+
+  .banner-footer {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-top: 1px solid #e0e0e0;
+    background: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .banner-header {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+    
+    .banner-title {
+      font-size: 40px;
+    }
+    
+    .banner-content-wrapper {
+      height: auto;
+      padding: 60px 0;
+      flex-direction: column;
+    }
+    
+    .banner-background-image {
+       position: relative;
+       transform: none;
+       left: 0;
+       top: 0;
+       margin-bottom: 30px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="banner-{{ section.id }}">
+  <div class="banner-container">
+    <header class="banner-header">
+      <div class="banner-logo">{{ section.settings.logo_text }}</div>
+      <div class="banner-subtitle">{{ section.settings.header_subtitle }}</div>
+      <a href="{{ section.settings.btn_choose_url }}" class="banner-btn-choose">
+        {{ section.settings.btn_choose_text }}
+        <span>&rarr;</span>
+      </a>
+    </header>
+
+    <div class="banner-content-wrapper">
+      {%- if section.settings.bg_image != blank -%}
+        <img src="{{ section.settings.bg_image | img_url: 'master' }}" alt="Banner Background" class="banner-background-image">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'banner-background-image placeholder-svg' }}
+      {%- endif -%}
+
+      <div class="banner-text-box">
+        <h1 class="banner-title">{{ section.settings.title }}</h1>
+        <p class="banner-desc">{{ section.settings.description }}</p>
+        <a href="{{ section.settings.btn_shop_url }}" class="banner-btn-shop">
+          {{ section.settings.btn_shop_text }}
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="banner-footer">
+      {{ section.settings.footer_text }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "header_subtitle",
+      "label": "Header Subtitle",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "btn_choose_text",
+      "label": "Choose Gift Button Text",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "btn_choose_url",
+      "label": "Choose Gift Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "text",
+      "id": "btn_shop_text",
+      "label": "Shop Now Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "btn_shop_url",
+      "label": "Shop Now Button URL"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "footer_text",
+      "label": "Footer Ticker Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner"
+    }
+  ]
+}
+{% endschema %}

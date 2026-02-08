@@ -1,0 +1,211 @@
+{%- style -%}
+  .product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: #000;
+  }
+
+  .modal-header-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .modal-image {
+    width: 120px;
+    height: 140px;
+    flex-shrink: 0;
+  }
+
+  .modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-details {
+    flex-grow: 1;
+  }
+
+  .modal-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    text-transform: capitalize;
+  }
+
+  .modal-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .modal-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #666;
+    margin-bottom: 0;
+  }
+
+  .variant-group {
+    margin-bottom: 25px;
+  }
+
+  .variant-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    color: #111;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+    letter-spacing: 0.5px;
+  }
+
+  /* Color buttons */
+  .variant-options-buttons {
+    display: flex;
+    border: 1px solid #000;
+  }
+
+  .variant-option-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    border-right: 1px solid #000;
+    transition: all 0.3s ease;
+  }
+
+  .variant-option-btn:last-child {
+    border-right: none;
+  }
+
+  .variant-option-btn.selected {
+    background: #000;
+    color: #fff;
+  }
+
+  /* Size select */
+  .select-wrapper {
+    position: relative;
+    border: 1px solid #000;
+  }
+
+  .variant-select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    appearance: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .select-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 10px;
+  }
+
+  .modal-atc-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+  }
+
+  .modal-atc-btn:hover {
+    background: #333;
+  }
+
+  .modal-atc-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 600px) {
+    .modal-content {
+      padding: 30px 20px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="ProductModal" class="product-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="CloseModal">&times;</button>
+    
+    <div class="modal-header-info">
+      <div class="modal-image">
+        <img id="ModalImage" src="" alt="Product Image">
+      </div>
+      <div class="modal-details">
+        <h3 id="ModalTitle" class="modal-title"></h3>
+        <div id="ModalPrice" class="modal-price"></div>
+        <div id="ModalDescription" class="modal-description"></div>
+      </div>
+    </div>
+    
+    <div id="ModalVariants" class="modal-variants">
+      <!-- Variants will be injected here via JS -->
+    </div>
+
+    <button id="ModalAddToCart" class="modal-atc-btn">
+      <span>ADD TO CART</span>
+      <span class="arrow">&rarr;</span>
+    </button>
+  </div>
+</div>
+
+<script src="{{ 'theme-custom.js' | asset_url }}" defer></script>
