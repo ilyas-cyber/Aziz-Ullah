@@ -4,17 +4,17 @@ This repository contains a custom Shopify theme implementation built for the Eco
 
 ## Features
 
-### 🚀 Custom Hero Banner
+###  Custom Hero Banner
 - Fully editable text (Logo, Subtitle, Title, Description, Footer) via Shopify Customizer.
 - Premium "New Page" swipe animations on action buttons.
 - Mobile-responsive design with optimized asset loading.
 
-### 🍱 Interactive Product Grid
+###  Interactive Product Grid
 - 6-block grid with dynamic product selection.
 - Custom hotspot icons (+) that trigger a detailed product popup.
 - Clean, minimal aesthetic matching Figma design.
 
-### 🛍️ Dynamic Product Modal
+###  Dynamic Product Modal
 - **Vanilla JS Implementation**: No jQuery or external libraries used.
 - **Dynamic Variants**: Color options as buttons and Size as a stylized dropdown.
 - **Smart Logic**: Automatically adds a "Soft Winter Jacket" to the cart when "Black" + "Medium" variants are selected together.
@@ -26,7 +26,7 @@ This repository contains a custom Shopify theme implementation built for the Eco
 - **Vanilla CSS**: Custom design system without bloated frameworks.
 - **Shopify AJAX API**: For real-time product data and cart management.
 
-## 📤 How to Push to GitHub
+##  How to Push to GitHub
 
 If you haven't pushed your code yet, run these commands in your terminal inside the `NewThem` folder:
 
